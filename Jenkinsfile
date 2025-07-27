@@ -18,7 +18,7 @@ pipeline {
 
     stages {
         stage('Check out') {
-            step {
+            steps {
               checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'gitHub', url: 'https://github.com/soe-wai-lin/onlinebooksales.git']])  
             }
         }
