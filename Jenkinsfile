@@ -4,7 +4,8 @@ pipeline {
         label 'Jenkins-Agent'
     }
     tools {
-        nodejs 'nodejs-18.20.8'    
+        nodejs 'nodejs-18.20.8'   
+        terraform 'terraform-1-12-1' 
     }
 
     environment {
@@ -16,6 +17,30 @@ pipeline {
     }
 
     stages {
+        stage('Terraform Init') {
+            steps {
+                dir('terra-aws-vpc') {
+                    terraformInit()
+                }
+            }
+        }
+
+        stage('Terraform Plan') {
+            steps {
+                dir('terra-aws-vpc') {
+                    terraformPlan()
+                }
+            }
+        }
+
+        stage('Terraform Apply') {
+            steps {
+                dir('terra-aws-vpc') {
+                    terraformApply()
+                }
+            }
+        }
+
         stage('Install dependencies') {
             steps {
                 sh '''
