@@ -36,23 +36,38 @@ pipeline {
             }
         }
 
-        // stage('Terraform Plan') {
-        //     steps {
-        //         sh '''
-        //             cd terra-aws-vpc
-        //             terraform plan
-        //         '''
-        //     }
-        // }
+        stage('Terraform Plan') {
+            steps {
+                withCredentials([aws(credentialsId: 'aws-dev01-cred')]) {
+                    sh '''
+                        cd terra-aws-vpc
+                        terraform plan
+                    '''
+                }
+            }
+        }
 
         // stage('Terraform Apply') {
         //     steps {
-        //         sh '''
-        //             cd terra-aws-vpc
-        //             terraform apply -auto-apply
-        //         '''
+        //         withCredentials([aws(credentialsId: 'aws-dev01-cred')]) {
+        //             sh '''
+        //                 cd terra-aws-vpc
+        //                 terraform apply -auto-approve
+        //             '''
+        //         }
         //     }
         // }
+
+        stage('Terraform destroy') {
+            steps {
+                withCredentials([aws(credentialsId: 'aws-dev01-cred')]) {
+                    sh '''
+                        cd terra-aws-vpc
+                        terraform destroy -auto-approve
+                    '''
+                }
+            }
+        }
 
         stage('Install dependencies') {
             steps {
