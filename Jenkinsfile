@@ -23,7 +23,7 @@ pipeline {
             }
         }
         
-        parallel {
+        parallel terraform_create: {
             stage('Terraform Init') {
                 steps {
                     withCredentials([aws(credentialsId: 'aws-dev01-cred')]) {
@@ -67,6 +67,7 @@ pipeline {
                     }
                 }
             }
+        }, DependencyCheck: {
 
             stage('Install dependencies') {
                 steps {
