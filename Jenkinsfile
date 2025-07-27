@@ -27,6 +27,7 @@ pipeline {
             steps {
                 sh '''
                     cd terra-aws-vpc
+                    which terraform && terraform version
                     terraform init
                 '''
             }
