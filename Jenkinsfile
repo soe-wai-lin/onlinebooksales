@@ -5,7 +5,7 @@ pipeline {
     }
     tools {
         nodejs 'nodejs-18.20.8'   
-        terraform 'terraform-1-12-1' 
+        terraform 'terraform-50724' 
     }
 
     environment {
