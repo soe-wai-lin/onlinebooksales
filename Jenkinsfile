@@ -62,7 +62,7 @@ pipeline {
         stage('OWASP Depencies Check') {
             steps {
                 dependencyCheck additionalArguments: '''--scan package.json 
-                --format ALL --dependency-check --updateonly''', odcInstallation: 'OWASP-DepCheck-10'
+                --format ALL --updateonly''', odcInstallation: 'OWASP-DepCheck-10'
 
                 publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, icon: '', keepAll: true, reportDir: './', reportFiles: 'dependency-check-jenkins.html', reportName: 'Dependency Check HTML Report', reportTitles: '', useWrapperFileDirectly: true])
 
