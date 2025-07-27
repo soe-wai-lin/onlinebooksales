@@ -22,69 +22,69 @@ pipeline {
               checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'gitHub', url: 'https://github.com/soe-wai-lin/onlinebooksales.git']])  
             }
         }
-
-        stage('Terraform Init') {
-            steps {
-                withCredentials([aws(credentialsId: 'aws-dev01-cred')]) {
-                    sh '''
-                        cd terra-aws-vpc
-                        terraform init
-                        terraform plan
-                        terraform apply -auto-approve
-                    '''
+        
+        parallel {
+            stage('Terraform Init') {
+                steps {
+                    withCredentials([aws(credentialsId: 'aws-dev01-cred')]) {
+                        sh '''
+                            cd terra-aws-vpc
+                            terraform init
+                        '''
+                    }
                 }
             }
-        }
 
-        stage('Terraform Plan') {
-            steps {
-                withCredentials([aws(credentialsId: 'aws-dev01-cred')]) {
-                    sh '''
-                        cd terra-aws-vpc
-                        terraform plan
-                    '''
+            stage('Terraform Plan') {
+                steps {
+                    withCredentials([aws(credentialsId: 'aws-dev01-cred')]) {
+                        sh '''
+                            cd terra-aws-vpc
+                            terraform plan
+                        '''
+                    }
                 }
             }
-        }
 
-        // stage('Terraform Apply') {
-        //     steps {
-        //         withCredentials([aws(credentialsId: 'aws-dev01-cred')]) {
-        //             sh '''
-        //                 cd terra-aws-vpc
-        //                 terraform apply -auto-approve
-        //             '''
-        //         }
-        //     }
-        // }
+            // stage('Terraform Apply') {
+            //     steps {
+            //         withCredentials([aws(credentialsId: 'aws-dev01-cred')]) {
+            //             sh '''
+            //                 cd terra-aws-vpc
+            //                 terraform apply -auto-approve
+            //             '''
+            //         }
+            //     }
+            // }
 
-        stage('Terraform destroy') {
-            steps {
-                withCredentials([aws(credentialsId: 'aws-dev01-cred')]) {
-                    sh '''
-                        cd terra-aws-vpc
-                        terraform destroy -auto-approve
-                    '''
+            stage('Terraform destroy') {
+                steps {
+                    withCredentials([aws(credentialsId: 'aws-dev01-cred')]) {
+                        sh '''
+                            cd terra-aws-vpc
+                            terraform destroy -auto-approve
+                        '''
+                    }
                 }
             }
-        }
 
-        stage('Install dependencies') {
-            steps {
-                sh '''
-                    npm -v
-                    node -v
-                    npm install
-                '''   
+            stage('Install dependencies') {
+                steps {
+                    sh '''
+                        npm -v
+                        node -v
+                        npm install
+                    '''   
+                }
             }
-        }
-   
     
-        stage('NPM Dependiencies Audit') {
-            steps {
-                sh '''
-                    npm audit --audit-level=critical
-                '''
+        
+            stage('NPM Dependiencies Audit') {
+                steps {
+                    sh '''
+                        npm audit --audit-level=critical
+                    '''
+                }
             }
         }
 
