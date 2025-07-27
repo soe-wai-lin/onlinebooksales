@@ -99,14 +99,17 @@ resource "aws_route_table_association" "terr_rt_asso_b" {
   route_table_id = aws_route_table.terra_pub_rt.id
 }
 
-data "terraform_remote_state" "db" {
-  backend = "s3"
+# data "terraform_remote_state" "db" {
+#   backend = "s3"
 
-  config = {
-    bucket = "swlbucket01"
-    key = "vpc/terraform.tfstate"
-    region = "ap-southeast-1"
-    use_lockfile = "true"
-  }
-}
+#   config = {
+#     bucket = "swlbucket01"
+#     key = "vpc/terraform.tfstate"
+#     region = "ap-southeast-1"
+#     assume_role = {
+#      role_arn = "arn:aws:iam::851725184910:user/dev01"
+#     }
+#     use_lockfile = "true"
+#   }
+# }
 
