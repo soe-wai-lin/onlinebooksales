@@ -46,27 +46,27 @@ pipeline {
                     }
                 }
 
-                stage('Terraform Apply') {
-                    steps {
-                        withCredentials([aws(credentialsId: 'aws-dev01-cred')]) {
-                            sh '''
-                                cd eks-terra
-                                terraform apply -auto-approve
-                            '''
-                        }
-                    }
-                }
-
-                // stage('Terraform destroy') {
+                // stage('Terraform Apply') {
                 //     steps {
                 //         withCredentials([aws(credentialsId: 'aws-dev01-cred')]) {
                 //             sh '''
                 //                 cd eks-terra
-                //                 terraform destroy -auto-approve
+                //                 terraform apply -auto-approve
                 //             '''
                 //         }
                 //     }
                 // }
+
+                stage('Terraform destroy') {
+                    steps {
+                        withCredentials([aws(credentialsId: 'aws-dev01-cred')]) {
+                            sh '''
+                                cd eks-terra
+                                terraform destroy -auto-approve
+                            '''
+                        }
+                    }
+                }
 
                 stage('Install dependencies') {
                     steps {
