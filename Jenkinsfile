@@ -18,7 +18,9 @@ pipeline {
 
     stages {
         stage('Check out') {
-            checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'gitHub', url: 'https://github.com/soe-wai-lin/onlinebooksales.git']])
+            step {
+              checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'gitHub', url: 'https://github.com/soe-wai-lin/onlinebooksales.git']])  
+            }
         }
 
         stage('Terraform Init') {
