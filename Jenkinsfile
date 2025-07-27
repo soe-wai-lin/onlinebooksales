@@ -28,7 +28,7 @@ pipeline {
                     steps {
                         withCredentials([aws(credentialsId: 'aws-dev01-cred')]) {
                             sh '''
-                                cd terra-aws-vpc
+                                cd vpc-eks-terra
                                 terraform init
                             '''
                         }
@@ -39,7 +39,7 @@ pipeline {
                     steps {
                         withCredentials([aws(credentialsId: 'aws-dev01-cred')]) {
                             sh '''
-                                cd terra-aws-vpc
+                                cd vpc-eks-terra
                                 terraform plan
                             '''
                         }
@@ -61,7 +61,7 @@ pipeline {
                     steps {
                         withCredentials([aws(credentialsId: 'aws-dev01-cred')]) {
                             sh '''
-                                cd terra-aws-vpc
+                                cd vpc-eks-terra
                                 terraform destroy -auto-approve
                             '''
                         }
