@@ -70,13 +70,13 @@ pipeline {
         // }
 
         stage('Docker Image Build') {
-            dir('client') {
                 steps {
                     sh '''
+                        cd client
                         docker build -t soewailin/onlinebook:$GIT_COMMIT .
                     '''
                 }
-            }
+            
         }
 
         stage('Trivy Scan Docker Image') {
