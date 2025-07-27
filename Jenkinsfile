@@ -58,25 +58,11 @@ pipeline {
             }
         }
         
-        stage('Prep Dependency-Check') {
-            steps {
-                sh '''
-                    echo "Show Dependency-Check Version"
-                    dependency-check --version
-
-                    echo "Clear old Dependency-Check cache"
-                    rm -rf ~/.dependency-check
-
-                    echo "Download fresh NVD data"
-                    dependency-check --updateonly
-                '''
-            }
-        }
 
         stage('OWASP Depencies Check') {
             steps {
                 dependencyCheck additionalArguments: '''--scan package.json 
-                --format ALL''', odcInstallation: 'OWASP-DepCheck-10'
+                --format ALL --dependency-check --updateonly''', odcInstallation: 'OWASP-DepCheck-10'
 
                 publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, icon: '', keepAll: true, reportDir: './', reportFiles: 'dependency-check-jenkins.html', reportName: 'Dependency Check HTML Report', reportTitles: '', useWrapperFileDirectly: true])
 
