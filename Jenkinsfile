@@ -57,7 +57,7 @@ pipeline {
                 }
             }
         }
-        stages {
+        
         stage('Prep Dependency-Check') {
             steps {
                 sh '''
