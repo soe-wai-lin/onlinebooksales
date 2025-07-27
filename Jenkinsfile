@@ -25,30 +25,34 @@ pipeline {
 
         stage('Terraform Init') {
             steps {
-                sh '''
-                    cd terra-aws-vpc
-                    terraform init
-                '''
+                withCredentials([aws(credentialsId: 'aws-dev01-cred')]) {
+                    sh '''
+                        cd terra-aws-vpc
+                        terraform init
+                        terraform plan
+                        terraform apply -auto-approve
+                    '''
+                }
             }
         }
 
-        stage('Terraform Plan') {
-            steps {
-                sh '''
-                    cd terra-aws-vpc
-                    terraform plan
-                '''
-            }
-        }
+        // stage('Terraform Plan') {
+        //     steps {
+        //         sh '''
+        //             cd terra-aws-vpc
+        //             terraform plan
+        //         '''
+        //     }
+        // }
 
-        stage('Terraform Apply') {
-            steps {
-                sh '''
-                    cd terra-aws-vpc
-                    terraform apply -auto-apply
-                '''
-            }
-        }
+        // stage('Terraform Apply') {
+        //     steps {
+        //         sh '''
+        //             cd terra-aws-vpc
+        //             terraform apply -auto-apply
+        //         '''
+        //     }
+        // }
 
         stage('Install dependencies') {
             steps {
