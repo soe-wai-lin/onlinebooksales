@@ -20,7 +20,9 @@ pipeline {
         stage('Terraform Init') {
             steps {
                 dir('terra-aws-vpc') {
-                    terraformInit()
+                    sh '''
+                        terraform init
+                    '''
                 }
             }
         }
@@ -28,7 +30,9 @@ pipeline {
         stage('Terraform Plan') {
             steps {
                 dir('terra-aws-vpc') {
-                    terraformPlan()
+                    sh '''
+                        terraform plan
+                    '''
                 }
             }
         }
@@ -36,7 +40,9 @@ pipeline {
         stage('Terraform Apply') {
             steps {
                 dir('terra-aws-vpc') {
-                    terraformApply()
+                    sh '''
+                        terraform apply -auto-approve
+                    '''
                 }
             }
         }
