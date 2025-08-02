@@ -11,7 +11,7 @@ COPY . .
 # Set the DATABASE_URL environment variable from the .env file
 # ENV MONGO_URL=${MONGO_URL}
 
-ENV MONGO_URL=mongodb://localhost:27017
+# ENV MONGO_URL=mongodb://localhost:27017
 
 EXPOSE 3000
 
