@@ -2,7 +2,7 @@ FROM node:18.20-alpine3.20
 
 WORKDIR /expressapp
 
-COPY package* .
+COPY package*.json .
 
 RUN npm install
 
