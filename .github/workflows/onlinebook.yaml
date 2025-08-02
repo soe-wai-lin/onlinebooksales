@@ -14,7 +14,7 @@
     unit-testing:
       name: Unit Testing
       runs-on: ubuntu-latest
-      container: node:20
+      container: node:18
       steps:
         - name: Checkout Repository
           uses: actions/checkout@v4
