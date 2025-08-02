@@ -1,18 +1,18 @@
-# FROM node:18.20-alpine3.20
+FROM node:18.20-alpine3.20
 
-# WORKDIR /expressapp
+WORKDIR /expressapp
 
-# COPY package* .
+COPY package* .
 
-# RUN npm install
+RUN npm install
 
-# COPY . .
+COPY . .
 
-# # Set the DATABASE_URL environment variable from the .env file
-# # ENV MONGO_URL=${MONGO_URL}
+# Set the DATABASE_URL environment variable from the .env file
+# ENV MONGO_URL=${MONGO_URL}
 
-# # ENV MONGO_URL=mongodb://localhost:27017
+# ENV MONGO_URL=mongodb://localhost:27017
 
-# EXPOSE 3000
+EXPOSE 3000
 
-# CMD ["npm", "run", "start"]
+CMD ["npm", "run", "start"]
