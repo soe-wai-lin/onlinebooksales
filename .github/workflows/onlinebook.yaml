@@ -1,5 +1,5 @@
 ---
-  name: Solar System Workflow
+  name: onlinebook workflow 
   on:
     workflow_dispatch: null
     push:
@@ -89,7 +89,7 @@
           uses: docker/build-push-action@v6.18.0
           with:
             push: true
-            tag: soewailin/onlinebook:v1
+            tags: soewailin/onlinebook:v1
             context: .
     # dev-deploy:
     #   name: dev-deployment
