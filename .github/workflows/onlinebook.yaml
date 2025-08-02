@@ -89,7 +89,7 @@
           uses: docker/build-push-action@v6.18.0
           with:
             push: true
-            tag: soewailin/onlinebook
+            tag: soewailin/onlinebook:v1
     # dev-deploy:
     #   name: dev-deployment
     #   runs-on: ubuntu-latest
