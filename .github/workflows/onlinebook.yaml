@@ -90,6 +90,7 @@
           with:
             push: true
             tag: soewailin/onlinebook:v1
+            context: .
     # dev-deploy:
     #   name: dev-deployment
     #   runs-on: ubuntu-latest
