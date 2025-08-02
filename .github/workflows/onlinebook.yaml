@@ -85,7 +85,7 @@
           uses: docker/build-push-action@v6.18.0
           with:
             push: true
-            tags: soewailin/onlinebook:v4
+            tags: soewailin/onlinebook:v5
             context: .
     # dev-deploy:
     #   name: dev-deployment
