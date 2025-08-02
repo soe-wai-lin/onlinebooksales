@@ -48,14 +48,10 @@
       needs: unit-testing
       name: code-coverage
       runs-on: ubuntu-latest
+      container: node:18
       steps:
         - name: checkout repo
           uses: actions/checkout@v4.2.2
-
-        - name: setup node
-          uses: actions/setup-node@v4
-          with:
-            node-version: 18
 
         - name: install nodejs dependencies
           run: npm install
@@ -89,7 +85,7 @@
           uses: docker/build-push-action@v6.18.0
           with:
             push: true
-            tags: soewailin/onlinebook:v1
+            tags: soewailin/onlinebook:v2
             context: .
     # dev-deploy:
     #   name: dev-deployment
